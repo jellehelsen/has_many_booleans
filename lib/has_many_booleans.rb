@@ -304,6 +304,7 @@ module HasManyBooleans #:nodoc:
     # hook in callbacks part 2 (to not overwrite after_initialize)
     # TODO someday: run callback after booleans have been fetched
     def initialize(attributes = nil) # :nodoc:
+      super()
 
       if init_callback_defined = respond_to?(:after_initialize)
         instance_eval do
@@ -312,7 +313,6 @@ module HasManyBooleans #:nodoc:
         end
       end
 
-      super()
       initialize_booleans
       self.attributes = attributes unless attributes.nil?
       result = yield self if block_given?
